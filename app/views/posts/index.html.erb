@@ -1,14 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Posts</h1>
-
+<%= link_to "New post", new_post_path %>
 <div id="posts">
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <%= render post %>
+        <%= link_to "Show this post", post, class:"card-link" %>
+        <%= link_to "Like #{post.reactions.select { |post| post[:kind] == 'like' }.count}", post,class:"card-link" %>
+        <%= link_to "Dislike #{post.reactions.select { |post| post[:kind] == 'dislike' }.count}", post,class:"card-link" %>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New post", new_post_path %>
+
